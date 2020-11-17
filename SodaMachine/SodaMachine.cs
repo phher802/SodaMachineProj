@@ -26,11 +26,28 @@ namespace SodaMachine
         //A method to fill the sodamachines register with coin objects.
         public void FillRegister()
         {
+            Coin quarter = new Quarter();
+            Coin nickle = new Nickel();
+            Coin dime = new Dime();
+            Coin penny = new Penny();
+            _register.Add(quarter);
+            _register.Add(nickle);
+            _register.Add(dime);
+            _register.Add(penny);
+
+
            
         }
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
         {
+            Can cola = new Cola();
+            Can orangeSoda = new OrangeSoda();
+            Can rootBeer = new RootBeer();
+            _inventory.Add(cola);
+            _inventory.Add(orangeSoda);
+            _inventory.Add(rootBeer);
+
             
         }
         //Method to be called to start a transaction.
@@ -45,16 +62,21 @@ namespace SodaMachine
         }
         
         //This is the main transaction logic think of it like "runGame".  This is where the user will be prompted for the desired soda.
+            // how does the customer select the soda? 
         //grab the desired soda from the inventory.
         //get payment from the user.
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
+            Console.WriteLine("Please make a soda selection");
+            string custSelection = Console.ReadLine();
            
         }
         //Gets a soda from the inventory based on the name of the soda.
         private Can GetSodaFromInventory(string nameOfSoda)
         {
+            
+            
           
         }
 
