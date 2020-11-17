@@ -57,12 +57,19 @@ namespace SodaMachine
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
         {
-            Can cola = new Cola();
-            Can orangeSoda = new OrangeSoda();
-            Can rootBeer = new RootBeer();
-            _inventory.Add(cola);
-            _inventory.Add(orangeSoda);
-            _inventory.Add(rootBeer);
+
+            for (int i = 0; i < 20; i++)
+            {
+                Can cola = new Cola();
+                _inventory.Add(cola);
+
+                Can orangeSoda = new OrangeSoda();
+                _inventory.Add(orangeSoda);
+
+                Can rootBeer = new RootBeer();
+                _inventory.Add(rootBeer);
+            }
+            
 
             
         }
