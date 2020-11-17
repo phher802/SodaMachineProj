@@ -11,6 +11,7 @@ namespace SodaMachine
         //Member Variables (Has A)
         private List<Coin> _register;
         private List<Can> _inventory;
+        public string currentSelection;
 
         //Constructor (Spawner)
         public SodaMachine()
@@ -26,14 +27,29 @@ namespace SodaMachine
         //A method to fill the sodamachines register with coin objects.
         public void FillRegister()
         {
-            Coin quarter = new Quarter();
-            Coin nickle = new Nickel();
-            Coin dime = new Dime();
-            Coin penny = new Penny();
-            _register.Add(quarter);
-            _register.Add(nickle);
-            _register.Add(dime);
-            _register.Add(penny);
+            for (int i = 0; i < 20; i++)
+            {
+                Coin quarter = new Quarter();
+                _register.Add(quarter);
+
+                Coin nickle = new Nickel();
+                _register.Add(nickle);
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                Coin dime = new Dime();
+                _register.Add(dime);
+            }
+
+
+            for (int i = 0; i < 50; i++)
+            {
+                Coin penny = new Penny();
+                _register.Add(penny);
+            }
+
+           
 
 
            
@@ -68,16 +84,23 @@ namespace SodaMachine
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
-            Console.WriteLine("Please make a soda selection");
-            string custSelection = Console.ReadLine();
-           
+            string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
+            //la de da de da logic
+            //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
+           //other methods to call to make a transaction
+           //what are the different types of transactions?
+           //what methods would we call in which order for each one of these transaction types?
+            
         }
         //Gets a soda from the inventory based on the name of the soda.
         private Can GetSodaFromInventory(string nameOfSoda)
         {
+            //what is our return type?
+            //what methods exist to locate/get a selected can?  userInterface?
+            //what values does it need?
             
-            
-          
+
+            return nameOfSoda;
         }
 
         //This is the main method for calculating the result of the transaction.
