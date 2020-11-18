@@ -120,14 +120,12 @@ namespace SodaMachine
         //If the payment does not meet the cost of the soda: dispense payment back to the customer.
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
-            // cust inserts correct coins for soda chosen -- use switch statement? already method created?
-            UserInterface.CoinSelection(chosenSoda, payment);
-
-            if (payment > chosenSoda.Price)
+            double valueOfCoinList = TotalCoinValue(payment);
+            
+            if (valueOfCoinList > chosenSoda.Price)
             {
 
             }
-
         }
         //Takes in the value of the amount of change needed.
         //Attempts to gather all the required coins from the sodamachine's register to make change.
@@ -141,17 +139,58 @@ namespace SodaMachine
         //If it does have one, return true.  Else, false.
         private bool RegisterHasCoin(string name)
         {
-           
+            bool hasCoin = true;
+            
+            foreach (Coin coin in _register)
+            {
+                if (coin.Name.Contains(name))
+                {
+                    hasCoin = true;
+                }
+                else
+                {
+                    hasCoin = false;
+                }
+               
+            }
+
+            return hasCoin;
+            
         }
         //Reusable method to return a coin from the register.
         //Returns null if no coin can be found of that name.
         private Coin GetCoinFromRegister(string name)
         {
-            
+            Coin coinToRemove = null;
+       
+            for (int i = 0; i < _register.Count; i++)
+            {
+
+                if (name == _register[i].Name)
+                {
+                    coinToRemove = _register[i];
+                    _register.Remove(coinToRemove);
+                    //once its found, dont loop anymore
+                    break;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+
+            return coinToRemove;
         }
         //Takes in the total payment amount and the price of can to return the change amount.
         private double DetermineChange(double totalPayment, double canPrice)
         {
+
+            double changeToReturn;
+
+            changeToReturn = totalPayment - canPrice;
+
+            return changeToReturn;
             
         }
         //Takes in a list of coins to returnt he total value of the coins as a double.
