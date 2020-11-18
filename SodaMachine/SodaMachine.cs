@@ -11,7 +11,7 @@ namespace SodaMachine
         //Member Variables (Has A)
         private List<Coin> _register;
         private List<Can> _inventory;
-        public string currentSelection;
+      
 
         //Constructor (Spawner)
         public SodaMachine()
@@ -83,16 +83,17 @@ namespace SodaMachine
                 Transaction(customer);
             }
         }
-        
+
         //This is the main transaction logic think of it like "runGame".  This is where the user will be prompted for the desired soda.
-            // how does the customer select the soda? 
-        //grab the desired soda from the inventory.
         //get payment from the user.
+        //grab the desired soda from the inventory.
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
+            
             string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
-            //la de da de da logic
+            UserInterface.DisplayCost(sodaChoice);
+            
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
            //other methods to call to make a transaction
            //what are the different types of transactions?
@@ -107,7 +108,7 @@ namespace SodaMachine
             //what values does it need?
             
 
-            return nameOfSoda;
+
         }
 
         //This is the main method for calculating the result of the transaction.
@@ -119,7 +120,14 @@ namespace SodaMachine
         //If the payment does not meet the cost of the soda: dispense payment back to the customer.
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
-           
+            // cust inserts correct coins for soda chosen -- use switch statement? already method created?
+            UserInterface.CoinSelection(chosenSoda, payment);
+
+            if (payment > chosenSoda.Price)
+            {
+
+            }
+
         }
         //Takes in the value of the amount of change needed.
         //Attempts to gather all the required coins from the sodamachine's register to make change.
