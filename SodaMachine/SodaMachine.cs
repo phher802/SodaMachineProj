@@ -131,8 +131,32 @@ namespace SodaMachine
         //Attempts to gather all the required coins from the sodamachine's register to make change.
         //Returns the list of coins as change to despense.
         //If the change cannot be made, return null.
-        private List<Coin> GatherChange(double changeValue)
+        private List<Coin> GatherChange(double changeValue) //already have change value passed in; need to find coins to equal change value
         {
+            List < Coin > changeToDispense = new List<Coin>();
+            
+
+            for (int i = 0; i < changeValue; i++) //loop through changevalue amount
+            {
+                if(changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
+                {
+                    changeToDispense.Add(GetCoinFromRegister(_register[i].Name));
+                }
+                else
+                {
+                    return null;
+                }
+               
+                
+            }
+
+            return changeToDispense;
+
+            //what is the change value passed in?  if $1.10
+            //what coins are needed to return change value?
+            // where are the values of coins stores? in the register list
+
+    
             
         }
         //Reusable method to check if the register has a coin of that name.
@@ -214,7 +238,8 @@ namespace SodaMachine
         //Puts a list of coins into the soda machines register.
         private void DepositCoinsIntoRegister(List<Coin> coins)
         {
-           
+            //list of coins to deposit
+            //deposit certain coins
         }
     }
 }
