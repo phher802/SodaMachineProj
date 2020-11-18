@@ -124,7 +124,7 @@ namespace SodaMachine
             
             if (valueOfCoinList > chosenSoda.Price)
             {
-
+                
             }
         }
         //Takes in the value of the amount of change needed.
@@ -197,19 +197,18 @@ namespace SodaMachine
         private double TotalCoinValue(List<Coin> payment)
         {
             //what is the value of the coins?
-            double value = 0;
-            double valueOfCoin;
+            double valueOfCoinList = 0;
+            double value;
             
-
             for (int i = 0; i < payment.Count; i++)
             {
-                valueOfCoin = _register[i].Value;
-                value = +valueOfCoin;
+                value = _register[i].Value;
+                valueOfCoinList = +value;
             }
             //list of coins
             //return value of coins
 
-            return value;     
+            return valueOfCoinList;     
 
         }
         //Puts a list of coins into the soda machines register.
