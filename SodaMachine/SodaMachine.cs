@@ -11,7 +11,7 @@ namespace SodaMachine
         //Member Variables (Has A)
         private List<Coin> _register;
         private List<Can> _inventory;
-      
+
 
         //Constructor (Spawner)
         public SodaMachine()
@@ -49,10 +49,10 @@ namespace SodaMachine
                 _register.Add(penny);
             }
 
-           
 
 
-           
+
+
         }
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
@@ -69,9 +69,9 @@ namespace SodaMachine
                 Can rootBeer = new RootBeer();
                 _inventory.Add(rootBeer);
             }
-            
 
-            
+
+
         }
         //Method to be called to start a transaction.
         //Takes in a customer which can be passed freely to which ever method needs it.
@@ -90,15 +90,15 @@ namespace SodaMachine
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
-            
+
             string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
-            
-            
+
+
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
-           //other methods to call to make a transaction
-           //what are the different types of transactions?
-           //what methods would we call in which order for each one of these transaction types?
-            
+            //other methods to call to make a transaction
+            //what are the different types of transactions?
+            //what methods would we call in which order for each one of these transaction types?
+
         }
         //Gets a soda from the inventory based on the name of the soda.
         private Can GetSodaFromInventory(string nameOfSoda)
@@ -139,7 +139,7 @@ namespace SodaMachine
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
             double valueOfCoinList = TotalCoinValue(payment);
-            
+
             if (valueOfCoinList > chosenSoda.Price)
             {
                 if (_register.Count > 0)
@@ -147,6 +147,18 @@ namespace SodaMachine
                     GetSodaFromInventory(chosenSoda.Name);
                     GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
                 }
+                else if (_register.Count <= 0)
+                {
+                    GatherChange(valueOfCoinList);
+                }
+            }
+            else if (valueOfCoinList == chosenSoda.Price)
+            {
+                GetSodaFromInventory(chosenSoda.Name);
+            }
+            else
+            {
+                GatherChange(valueOfCoinList);
             }
         }
         //Takes in the value of the amount of change needed.
@@ -155,12 +167,12 @@ namespace SodaMachine
         //If the change cannot be made, return null.
         private List<Coin> GatherChange(double changeValue) //already have change value passed in; need to find coins to equal change value
         {
-            List < Coin > changeToDispense = new List<Coin>();
-            
+            List<Coin> changeToDispense = new List<Coin>();
+
 
             for (int i = 0; i < changeValue; i++) //loop through changevalue amount
             {
-                if(changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
+                if (changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
                 {
                     changeToDispense.Add(GetCoinFromRegister(_register[i].Name));
                 }
@@ -168,7 +180,7 @@ namespace SodaMachine
                 {
                     return null;
                 }
-                             
+
             }
 
             return changeToDispense;
@@ -177,15 +189,15 @@ namespace SodaMachine
             //what coins are needed to return change value?
             // where are the values of coins stores? in the register list
 
-    
-            
+
+
         }
         //Reusable method to check if the register has a coin of that name.
         //If it does have one, return true.  Else, false.
         private bool RegisterHasCoin(string name)
         {
             bool hasCoin = true;
-            
+
             foreach (Coin coin in _register)
             {
                 if (coin.Name.Contains(name))
@@ -196,23 +208,23 @@ namespace SodaMachine
                 {
                     hasCoin = false;
                 }
-               
+
             }
 
             return hasCoin;
-            
+
         }
         //Reusable method to return a coin from the register.
         //Returns null if no coin can be found of that name.
         private Coin GetCoinFromRegister(string name)
         {
             Coin coinToRemove = null;
-       
+
             for (int i = 0; i < _register.Count; i++)
             {
 
                 //if (name == _register[i].Name)
-                if(RegisterHasCoin(name))
+                if (RegisterHasCoin(name))
                 {
                     coinToRemove = _register[i];
                     _register.Remove(coinToRemove);
@@ -245,7 +257,7 @@ namespace SodaMachine
             //what is the value of the coins?
             double valueOfCoinList = 0;
             double value;
-            
+
             for (int i = 0; i < payment.Count; i++)
             {
                 value = _register[i].Value;
@@ -254,14 +266,14 @@ namespace SodaMachine
             //list of coins
             //return value of coins
 
-            return valueOfCoinList;     
+            return valueOfCoinList;
 
         }
         //Puts a list of coins into the soda machines register.
         private void DepositCoinsIntoRegister(List<Coin> coins)
         {
             //create a list of coins
-            
+
 
 
         }
