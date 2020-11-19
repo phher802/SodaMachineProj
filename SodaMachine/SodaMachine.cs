@@ -91,9 +91,12 @@ namespace SodaMachine
         private void Transaction(Customer customer)
         {
 
-            string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
-          
-            //get payment from usser
+            string sodaChoice = UserInterface.SodaSelection(_inventory); //displays choices for customer & outputs cust's choice
+            // how to get sodachoice into can data type?
+
+            //CalculateTransaction(customer.Wallet.Coins,  , customer);
+
+            //get payment from user
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
             //other methods to call to make a transaction
             //what are the different types of transactions?
@@ -272,8 +275,8 @@ namespace SodaMachine
         //Puts a list of coins into the soda machines register.
         private void DepositCoinsIntoRegister(List<Coin> coins)
         {
-            //create a list of coins
-
+            //where is this list of coins coming from - Payment? register refill?
+            
 
 
         }

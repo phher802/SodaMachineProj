@@ -29,7 +29,10 @@ namespace SodaMachine
                 willProceed = UserInterface.ContinuePrompt("Continue to next transaction?");
                 Console.Clear();
             }
-           
+
+
+
+
         }
     }
 }
