@@ -11,7 +11,7 @@ namespace SodaMachine
         //Member Variables (Has A)
         private List<Coin> _register;
         private List<Can> _inventory;
-
+        private List<Coin> changeToDispense;
 
         //Constructor (Spawner)
         public SodaMachine()
@@ -20,6 +20,7 @@ namespace SodaMachine
             _inventory = new List<Can>();
             FillInventory();
             FillRegister();
+           
         }
 
         //Member Methods (Can Do)
@@ -92,16 +93,19 @@ namespace SodaMachine
         {
             // 1. walk up to machine, choose a soda from list
             // 2.  choose a soda from the inventory (call GetSodaFromInventory, use Can object in CalculateTransaction)
-            // 3. put in payment
+            // 3. get money from wallet
+            // 4. put money in sodamachine
             // 4. soda machine calculate transaction
-            // 5. get soda removed from inventory
+            // 5. soda is removed from inventory
             // 6. get change if any
+            // 7. put change into wallet
+            // 8. put soda into backpack
             string sodaChoice = UserInterface.SodaSelection(_inventory);           
             GetSodaFromInventory(sodaChoice);
-
-            DepositCoinsIntoRegister(customer.coinsForPayment);
+            //customer.GatherCoinsFromWallet(GetSodaFromInventory(sodaChoice));
+            DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(GetSodaFromInventory(sodaChoice)));
             CalculateTransaction(customer.coinsForPayment, GetSodaFromInventory(sodaChoice), customer);
-
+            customer.AddCoinsIntoWallet(changeToDispense);
             
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
 
@@ -179,7 +183,7 @@ namespace SodaMachine
         //If the change cannot be made, return null.
         private List<Coin> GatherChange(double changeValue) //already have change value passed in; need to find coins to equal change value
         {
-            List<Coin> changeToDispense = new List<Coin>();
+            changeToDispense = new List<Coin>();
 
 
             for (int i = 0; i < changeValue; i++) //loop through changevalue amount
