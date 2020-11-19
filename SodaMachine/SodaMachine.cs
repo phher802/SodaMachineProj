@@ -92,7 +92,7 @@ namespace SodaMachine
         {
             
             string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
-            UserInterface.DisplayCost(sodaChoice);
+            
             
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
            //other methods to call to make a transaction
@@ -106,8 +106,26 @@ namespace SodaMachine
             //what is our return type?
             //what methods exist to locate/get a selected can?  userInterface?
             //what values does it need?
-            
+            Can getSoda = null;
 
+            for (int i = 0; i < _inventory.Count; i++)
+            {
+
+                if (nameOfSoda == _inventory[i].Name)
+                {
+                    getSoda = _inventory[i];
+                    _inventory.Remove(getSoda);
+                    //once its found, dont loop anymore
+                    break;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+
+            return getSoda;
 
         }
 
@@ -146,8 +164,7 @@ namespace SodaMachine
                 {
                     return null;
                 }
-               
-                
+                             
             }
 
             return changeToDispense;
@@ -238,8 +255,10 @@ namespace SodaMachine
         //Puts a list of coins into the soda machines register.
         private void DepositCoinsIntoRegister(List<Coin> coins)
         {
-            //list of coins to deposit
-            //deposit certain coins
+            //create a list of coins
+            
+
+
         }
     }
 }
