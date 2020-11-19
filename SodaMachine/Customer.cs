@@ -11,14 +11,14 @@ namespace SodaMachine
         //Member Variables (Has A)
         public Wallet Wallet;
         public Backpack Backpack;
-
+        public List<Coin> coinsForPayment;
 
         //Constructor (Spawner)
         public Customer()
         {
             Wallet = new Wallet();
             Backpack = new Backpack();
-
+            coinsForPayment = new List<Coin>();
             
         }
         //Member Methods (Can Do)
@@ -29,7 +29,7 @@ namespace SodaMachine
         //When all is said and done this method will return a list of coin objects that the customer will use a payment for their soda.
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
-            List<Coin> coinsForPayment = new List<Coin>();
+            
 
             string getCoins = UserInterface.CoinSelection(selectedCan, Wallet.Coins);
             coinsForPayment.Add(GetCoinFromWallet(getCoins));
@@ -69,12 +69,17 @@ namespace SodaMachine
             // how to grab that change?
 
             //Wallet.Coins.Add();
+            for (int i = 0; i < coinsToAdd.Count; i++)
+            {
+                Wallet.Coins.Add(coinsToAdd[i]);
+            }
 
         }
         //Takes in a can object to add to the customers backpack.
         public void AddCanToBackpack(Can purchasedCan)
         {
-            
+           
+
         }
     }
 }
