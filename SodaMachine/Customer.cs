@@ -29,10 +29,14 @@ namespace SodaMachine
         //When all is said and done this method will return a list of coin objects that the customer will use a payment for their soda.
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
-            
+            string getCoins;
 
-            string getCoins = UserInterface.CoinSelection(selectedCan, Wallet.Coins);
-            coinsForPayment.Add(GetCoinFromWallet(getCoins));
+            for (int i = 0; i < 5; i++)
+            {
+               getCoins = UserInterface.CoinSelection(selectedCan, Wallet.Coins);
+               coinsForPayment.Add(GetCoinFromWallet(getCoins));
+            }           
+            
             return coinsForPayment;
           
         }
@@ -78,8 +82,12 @@ namespace SodaMachine
         //Takes in a can object to add to the customers backpack.
         public void AddCanToBackpack(Can purchasedCan)
         {
-           
 
+
+            while (Backpack.cans.Count < 10)
+            {
+                Backpack.cans.Add(purchasedCan);
+            }
 
         }
     }

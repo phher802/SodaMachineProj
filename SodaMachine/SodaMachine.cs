@@ -101,11 +101,11 @@ namespace SodaMachine
             // 7. put change into wallet
             // 8. put soda into backpack
             string sodaChoice = UserInterface.SodaSelection(_inventory);           
-            GetSodaFromInventory(sodaChoice);
+            Can sodaCan = GetSodaFromInventory(sodaChoice);
             
-            DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(GetSodaFromInventory(sodaChoice)));
-            CalculateTransaction(customer.coinsForPayment, GetSodaFromInventory(sodaChoice), customer);
-            customer.AddCoinsIntoWallet();
+            DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(sodaCan));
+            CalculateTransaction(customer.coinsForPayment, sodaCan, customer);
+            
             
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
 
@@ -132,10 +132,7 @@ namespace SodaMachine
                     //once its found, dont loop anymore
                     break;
                 }
-                else
-                {
-                    return null;
-                }
+                
 
             }
 
