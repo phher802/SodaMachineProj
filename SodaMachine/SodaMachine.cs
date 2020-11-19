@@ -150,6 +150,7 @@ namespace SodaMachine
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
             double valueOfCoinList = TotalCoinValue(payment);
+            List<Coin> change = GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
 
             if (valueOfCoinList > chosenSoda.Price)
             {
@@ -157,8 +158,9 @@ namespace SodaMachine
                 {
                     
                     _inventory.Remove(chosenSoda);
-                    customer.AddCoinsIntoWallet(GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price)));
+                    customer.AddCoinsIntoWallet(change);
                     customer.AddCanToBackpack(chosenSoda);
+                    UserInterface.EndMessage(chosenSoda.Name, valueOfCoinList);
                     
                 }
                 else if (_register.Count <= 0)
@@ -191,11 +193,7 @@ namespace SodaMachine
                 {
                     changeToDispense.Add(GetCoinFromRegister(_register[i].Name));
                 }
-                else
-                {
-                    return null;
-                }
-
+                
             }
 
             return changeToDispense;
@@ -246,10 +244,6 @@ namespace SodaMachine
                     _register.Remove(coinToRemove);
                     //once its found, dont loop anymore
                     break;
-                }
-                else
-                {
-                    return null;
                 }
 
             }

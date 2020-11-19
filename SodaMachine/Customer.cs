@@ -57,10 +57,7 @@ namespace SodaMachine
                     //once its found, dont loop anymore
                     break;
                 }
-                else
-                {
-                    return null;
-                }
+            
 
             }
 
