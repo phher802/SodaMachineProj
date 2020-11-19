@@ -150,32 +150,35 @@ namespace SodaMachine
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
             double valueOfCoinList = TotalCoinValue(payment);
-            List<Coin> change = GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
+            double changeAmnt = DetermineChange(valueOfCoinList, chosenSoda.Price);
+            List<Coin> changeList = GatherChange(changeAmnt);
 
             if (valueOfCoinList > chosenSoda.Price)
             {
                 if (_register.Count > 0)
                 {
                     
-                    _inventory.Remove(chosenSoda);
-                    customer.AddCoinsIntoWallet(change);
+                    _inventory.Remove(chosenSoda);                   
                     customer.AddCanToBackpack(chosenSoda);
-                    UserInterface.EndMessage(chosenSoda.Name, valueOfCoinList);
-                    
+                    UserInterface.EndMessage(chosenSoda.Name, changeAmnt);
+                    customer.AddCoinsIntoWallet(changeList);
+
                 }
                 else if (_register.Count <= 0)
                 {
-                    customer.AddCoinsIntoWallet(GatherChange(valueOfCoinList));
+                    
+                    customer.AddCoinsIntoWallet(changeList);
                 }
             }
             else if (valueOfCoinList == chosenSoda.Price)
             {
                 _inventory.Remove(chosenSoda);
                 customer.AddCanToBackpack(chosenSoda);
+                UserInterface.EndMessage(chosenSoda.Name, changeAmnt);
             }
             else
-            {             
-               customer.AddCoinsIntoWallet(GatherChange(valueOfCoinList));
+            {
+                customer.AddCoinsIntoWallet(changeList);
             }
         }
         //Takes in the value of the amount of change needed.
