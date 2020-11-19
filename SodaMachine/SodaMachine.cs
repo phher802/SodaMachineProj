@@ -90,13 +90,17 @@ namespace SodaMachine
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
-
-            string sodaChoice = UserInterface.SodaSelection(_inventory); //displays choices for customer & outputs cust's choice
-            // how to get sodachoice into can data type?
+            // 1. walk up to machine, choose a soda from list
+            // 2.  choose a soda from the inventory (call GetSodaFromInventory, use Can object in CalculateTransaction)
+            // 3. put in payment
+            // 4. soda machine calculate transaction
+            // 5. get soda removed from inventory
+            // 6. get change if any
+            string sodaChoice = UserInterface.SodaSelection(_inventory);           
             GetSodaFromInventory(sodaChoice);
-            // call GetSodaFromInventory, use Can object in CalculateTransaction
+
             DepositCoinsIntoRegister(customer.coinsForPayment);
-            CalculateTransaction(customer.Wallet.Coins, GetSodaFromInventory(sodaChoice), customer);
+            CalculateTransaction(customer.coinsForPayment, GetSodaFromInventory(sodaChoice), customer);
 
             
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
