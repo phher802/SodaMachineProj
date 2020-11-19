@@ -162,7 +162,7 @@ namespace SodaMachine
             }
             else if (valueOfCoinList == chosenSoda.Price)
             {
-                GetSodaFromInventory(chosenSoda.Name);
+                _inventory.Remove(chosenSoda);
             }
             else
             {
@@ -283,8 +283,10 @@ namespace SodaMachine
             //get coins list from customer wallet
             // add coins list to soda machine register
 
-            coins = 
-            _register.Add(coins);
+            
+            _register
+
+            
 
 
         }
