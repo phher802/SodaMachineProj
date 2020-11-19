@@ -92,8 +92,8 @@ namespace SodaMachine
         {
 
             string sodaChoice = UserInterface.SodaSelection(_inventory); //asks what cust wants
-
-
+          
+            //get payment from usser
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
             //other methods to call to make a transaction
             //what are the different types of transactions?
