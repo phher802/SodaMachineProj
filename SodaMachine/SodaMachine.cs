@@ -93,11 +93,14 @@ namespace SodaMachine
 
             string sodaChoice = UserInterface.SodaSelection(_inventory); //displays choices for customer & outputs cust's choice
             // how to get sodachoice into can data type?
+            GetSodaFromInventory(sodaChoice);
+            // call GetSodaFromInventory, use Can object in CalculateTransaction
+            DepositCoinsIntoRegister(customer.coinsForPayment);
+            CalculateTransaction(customer.Wallet.Coins, GetSodaFromInventory(sodaChoice), customer);
 
-            //CalculateTransaction(customer.Wallet.Coins,  , customer);
-
-            //get payment from user
+            
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
+
             //other methods to call to make a transaction
             //what are the different types of transactions?
             //what methods would we call in which order for each one of these transaction types?
@@ -147,8 +150,10 @@ namespace SodaMachine
             {
                 if (_register.Count > 0)
                 {
-                    GetSodaFromInventory(chosenSoda.Name);
+                    
+                    _inventory.Remove(chosenSoda);
                     GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
+                    
                 }
                 else if (_register.Count <= 0)
                 {
@@ -272,11 +277,14 @@ namespace SodaMachine
             return valueOfCoinList;
 
         }
-        //Puts a list of coins into the soda machines register.
+        //Puts a list of coins into the soda machines register from the customer
         private void DepositCoinsIntoRegister(List<Coin> coins)
         {
-            //where is this list of coins coming from - Payment? register refill?
-            
+            //get coins list from customer wallet
+            // add coins list to soda machine register
+
+            coins = 
+            _register.Add(coins);
 
 
         }
