@@ -283,8 +283,13 @@ namespace SodaMachine
             //get coins list from customer wallet
             // add coins list to soda machine register
 
-            
-            _register
+            for (int i = 0; i < coins.Count; i++)
+            {
+                _register.Add(coins[i]);
+            }
+
+
+
 
             
 
