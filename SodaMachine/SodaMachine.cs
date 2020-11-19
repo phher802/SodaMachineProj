@@ -179,6 +179,7 @@ namespace SodaMachine
             else
             {
                 customer.AddCoinsIntoWallet(changeList);
+                Console.WriteLine($"Not enough payment was received for the {chosenSoda}.");
             }
         }
         //Takes in the value of the amount of change needed.
