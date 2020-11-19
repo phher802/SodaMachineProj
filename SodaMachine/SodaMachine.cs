@@ -142,7 +142,11 @@ namespace SodaMachine
             
             if (valueOfCoinList > chosenSoda.Price)
             {
-                
+                if (_register.Count > 0)
+                {
+                    GetSodaFromInventory(chosenSoda.Name);
+                    GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
+                }
             }
         }
         //Takes in the value of the amount of change needed.
@@ -207,7 +211,8 @@ namespace SodaMachine
             for (int i = 0; i < _register.Count; i++)
             {
 
-                if (name == _register[i].Name)
+                //if (name == _register[i].Name)
+                if(RegisterHasCoin(name))
                 {
                     coinToRemove = _register[i];
                     _register.Remove(coinToRemove);
