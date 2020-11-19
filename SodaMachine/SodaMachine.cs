@@ -91,8 +91,8 @@ namespace SodaMachine
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
-            // 1. walk up to machine, choose a soda from list
-            // 2.  choose a soda from the inventory (call GetSodaFromInventory, use Can object in CalculateTransaction)
+            // 1. walk up to machine
+            // 2. choose a soda from the inventory (call GetSodaFromInventory, use Can object in CalculateTransaction)
             // 3. get money from wallet
             // 4. put money in sodamachine
             // 4. soda machine calculate transaction
@@ -102,10 +102,10 @@ namespace SodaMachine
             // 8. put soda into backpack
             string sodaChoice = UserInterface.SodaSelection(_inventory);           
             GetSodaFromInventory(sodaChoice);
-            //customer.GatherCoinsFromWallet(GetSodaFromInventory(sodaChoice));
+            
             DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(GetSodaFromInventory(sodaChoice)));
             CalculateTransaction(customer.coinsForPayment, GetSodaFromInventory(sodaChoice), customer);
-            customer.AddCoinsIntoWallet(changeToDispense);
+            customer.AddCoinsIntoWallet();
             
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
 
@@ -128,7 +128,7 @@ namespace SodaMachine
                 if (nameOfSoda == _inventory[i].Name)
                 {
                     getSoda = _inventory[i];
-                    _inventory.Remove(getSoda);
+                    //_inventory.Remove(getSoda);
                     //once its found, dont loop anymore
                     break;
                 }
@@ -160,21 +160,23 @@ namespace SodaMachine
                 {
                     
                     _inventory.Remove(chosenSoda);
-                    GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price));
+                    customer.AddCoinsIntoWallet(GatherChange(DetermineChange(valueOfCoinList, chosenSoda.Price)));
+                    customer.AddCanToBackpack(chosenSoda);
                     
                 }
                 else if (_register.Count <= 0)
                 {
-                    GatherChange(valueOfCoinList);
+                    customer.AddCoinsIntoWallet(GatherChange(valueOfCoinList));
                 }
             }
             else if (valueOfCoinList == chosenSoda.Price)
             {
                 _inventory.Remove(chosenSoda);
+                customer.AddCanToBackpack(chosenSoda);
             }
             else
-            {
-                GatherChange(valueOfCoinList);
+            {             
+               customer.AddCoinsIntoWallet(GatherChange(valueOfCoinList));
             }
         }
         //Takes in the value of the amount of change needed.
@@ -219,6 +221,7 @@ namespace SodaMachine
                 if (coin.Name.Contains(name))
                 {
                     hasCoin = true;
+                    break;
                 }
                 else
                 {
