@@ -17,5 +17,6 @@ namespace SodaMachine
         }
 
         //Member Methods (Can Do)
+     
     }
 }

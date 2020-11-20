@@ -20,7 +20,7 @@ namespace SodaMachine
             _inventory = new List<Can>();
             FillInventory();
             FillRegister();
-           
+
         }
 
         //Member Methods (Can Do)
@@ -100,13 +100,14 @@ namespace SodaMachine
             // 6. get change if any
             // 7. put change into wallet
             // 8. put soda into backpack
-            string sodaChoice = UserInterface.SodaSelection(_inventory);           
+            string sodaChoice = UserInterface.SodaSelection(_inventory);
             Can sodaCan = GetSodaFromInventory(sodaChoice);
-            
-            DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(sodaCan));
-            CalculateTransaction(customer.coinsForPayment, sodaCan, customer);
-            
-            
+            List<Coin> custPayment = customer.GatherCoinsFromWallet(sodaCan);
+            //DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(sodaCan));
+
+            CalculateTransaction(custPayment, sodaCan, customer);
+
+
             //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
 
             //other methods to call to make a transaction
@@ -132,7 +133,7 @@ namespace SodaMachine
                     //once its found, dont loop anymore
                     break;
                 }
-                
+
 
             }
 
@@ -150,6 +151,7 @@ namespace SodaMachine
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
             double valueOfCoinList = TotalCoinValue(payment);
+            DepositCoinsIntoRegister(payment);
             double changeAmnt = DetermineChange(valueOfCoinList, chosenSoda.Price);
             List<Coin> changeList = GatherChange(changeAmnt);
 
@@ -157,8 +159,8 @@ namespace SodaMachine
             {
                 if (_register.Count > 0)
                 {
-                    
-                    _inventory.Remove(chosenSoda);                   
+
+                    _inventory.Remove(chosenSoda);
                     customer.AddCanToBackpack(chosenSoda);
                     UserInterface.EndMessage(chosenSoda.Name, changeAmnt);
                     customer.AddCoinsIntoWallet(changeList);
@@ -166,7 +168,7 @@ namespace SodaMachine
                 }
                 else if (_register.Count <= 0)
                 {
-                    
+
                     customer.AddCoinsIntoWallet(changeList);
                 }
             }
@@ -179,7 +181,8 @@ namespace SodaMachine
             else
             {
                 customer.AddCoinsIntoWallet(changeList);
-                Console.WriteLine($"Not enough payment was received for the {chosenSoda}.");
+                Console.WriteLine($"Not enough payment was received for the {chosenSoda.Name}.");
+                Console.WriteLine($"Your payment of {valueOfCoinList} has been returned");
             }
         }
         //Takes in the value of the amount of change needed.
@@ -190,15 +193,48 @@ namespace SodaMachine
         {
             changeToDispense = new List<Coin>();
 
+            Coin quarter = new Quarter();
+            Coin nickel = new Nickel();
+            Coin dime = new Dime();
+            Coin penny = new Penny();
 
-            for (int i = 0; i < changeValue; i++) //loop through changevalue amount
+
+            //for (int i = 0; i < changeValue; i++) //loop through changevalue amount
+            //{
+            if (changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
             {
-                if (changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
+                while (changeValue >= 0)
                 {
-                    changeToDispense.Add(GetCoinFromRegister(_register[i].Name));
+                    if (changeValue - quarter.Value >= 0)
+                    {
+                        changeToDispense.Add(quarter);
+                        changeValue -= quarter.Value;
+                    }
+                    else if (changeValue - dime.Value >= 0)
+                    {
+                        changeToDispense.Add(dime);
+                        changeValue -= dime.Value;
+
+                    }
+                    else if (changeValue - nickel.Value >= 0)
+                    {
+                        changeToDispense.Add(nickel);
+                        changeValue -= nickel.Value;
+                    }
+                    else
+                    {
+                        changeToDispense.Add(penny);
+                        changeValue = -penny.Value;
+
+                    }
                 }
-                
+
+
+
             }
+
+
+            //}
 
             return changeToDispense;
 
@@ -257,9 +293,11 @@ namespace SodaMachine
         //Takes in the total payment amount and the price of can to return the change amount.
         private double DetermineChange(double totalPayment, double canPrice)
         {
-            double changeToReturn;
+            double changeToReturn = 0;
 
             changeToReturn = totalPayment - canPrice;
+
+            //changeToReturn = totalPayment - canPrice;
 
             return changeToReturn;
 
@@ -270,17 +308,31 @@ namespace SodaMachine
         {
             //what is the value of the coins?
             double valueOfCoinList = 0;
-            double value;
 
-            for (int i = 0; i < payment.Count; i++)
+
+            foreach (Coin coin in payment)
             {
-                value = _register[i].Value;
-                valueOfCoinList = +value;
+                if (!payment.Contains(coin))
+                {
+                    break;
+                }
+                else if (payment.Contains(coin))
+                {
+                    valueOfCoinList += coin.Value;
+                }
+
             }
+            return valueOfCoinList;
+
+            //for (int i = 0; i < payment.Count; i++)
+            //{
+            //    //value = _register[i].Value;
+            //    valueOfCoinList
+            //}
             //list of coins
             //return value of coins
 
-            return valueOfCoinList;
+
 
         }
         //Puts a list of coins into the soda machines register from the customer
@@ -297,7 +349,7 @@ namespace SodaMachine
 
 
 
-            
+
 
 
         }

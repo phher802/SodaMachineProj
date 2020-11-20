@@ -31,14 +31,17 @@ namespace SodaMachine
         {
             string getCoins;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-               getCoins = UserInterface.CoinSelection(selectedCan, Wallet.Coins);
-               coinsForPayment.Add(GetCoinFromWallet(getCoins));
+                
+                    getCoins = UserInterface.CoinSelection(selectedCan, Wallet.Coins);
+                    coinsForPayment.Add(GetCoinFromWallet(getCoins));
+                                               
             }           
             
             return coinsForPayment;
-          
+
+           
         }
         //Returns a coin object from the wallet based on the name passed into it.
         //Returns null if no coin can be found
@@ -87,7 +90,7 @@ namespace SodaMachine
 
         }
 
-        public void WhatIsInMyBackPack()
+        public void CheckContentsOfBackPack()
         {
             for (int i = 0; i < Backpack.cans.Count; i++)
             {

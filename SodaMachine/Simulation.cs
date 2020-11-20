@@ -26,12 +26,13 @@ namespace SodaMachine
             while (willProceed)
             {
                 _sodaMachine.BeginTransaction(_customer);
+                
+                _customer.HowMuchCoinsLeftInWallet();
                 willProceed = UserInterface.ContinuePrompt("Continue to next transaction?");
                 Console.Clear();
             }
 
-            _customer.WhatIsInMyBackPack();
-            _customer.HowMuchCoinsLeftInWallet();
+            
 
 
 
