@@ -96,9 +96,9 @@ namespace SodaMachine
 
         }
 
-        public void HowMuchMoneyIsLeftInMyWallet()
+        public void HowMuchCoinsLeftInWallet()
         {
-            Console.WriteLine(Wallet.Coins.Count);
+            UserInterface.DiplayTotalValueOfCoins(Wallet.Coins);
         }
     }
 }
