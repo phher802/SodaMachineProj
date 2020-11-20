@@ -80,12 +80,25 @@ namespace SodaMachine
         public void AddCanToBackpack(Can purchasedCan)
         {
 
-
             while (Backpack.cans.Count < 10)
             {
                 Backpack.cans.Add(purchasedCan);
             }
 
+        }
+
+        public void WhatIsInMyBackPack()
+        {
+            for (int i = 0; i < Backpack.cans.Count; i++)
+            {
+                Console.WriteLine(Backpack.cans);
+            }
+
+        }
+
+        public void HowMuchMoneyIsLeftInMyWallet()
+        {
+            Console.WriteLine(Wallet.Coins.Count);
         }
     }
 }

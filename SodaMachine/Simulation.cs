@@ -30,7 +30,8 @@ namespace SodaMachine
                 Console.Clear();
             }
 
-
+            _customer.WhatIsInMyBackPack();
+            _customer.HowMuchMoneyIsLeftInMyWallet();
 
 
 
