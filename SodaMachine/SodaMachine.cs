@@ -324,15 +324,7 @@ namespace SodaMachine
             }
             return valueOfCoinList;
 
-            //for (int i = 0; i < payment.Count; i++)
-            //{
-            //    //value = _register[i].Value;
-            //    valueOfCoinList
-            //}
-            //list of coins
-            //return value of coins
-
-
+       
 
         }
         //Puts a list of coins into the soda machines register from the customer
