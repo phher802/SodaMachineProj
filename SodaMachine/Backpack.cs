@@ -14,6 +14,7 @@ namespace SodaMachine
         public Backpack()
         {
             cans = new List<Can>();
+
         }
 
         //Member Methods (Can Do)

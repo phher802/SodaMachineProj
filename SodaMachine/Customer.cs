@@ -20,6 +20,7 @@ namespace SodaMachine
             Backpack = new Backpack();
             coinsForPayment = new List<Coin>();
 
+
         }
         //Member Methods (Can Do)
 
@@ -30,7 +31,7 @@ namespace SodaMachine
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
             string getCoins;
-            
+
 
             for (int i = 0; i < 10; i++)
             {
@@ -92,19 +93,30 @@ namespace SodaMachine
         public void AddCanToBackpack(Can purchasedCan)
         {
 
-            while (Backpack.cans.Count < 10)
-            {
-                Backpack.cans.Add(purchasedCan);
-            }
+            Backpack.cans.Add(purchasedCan);
 
         }
 
         public void CheckContentsOfBackPack()
         {
-            foreach (Can can in Backpack.cans)
+           
+
+            for (int i = 0; i < Backpack.cans.Count; i++)
             {
-                Console.WriteLine(can.Name);
+                if (Backpack.cans.Count == 1)
+                {
+                    Console.WriteLine($"You have a {Backpack.cans[i].Name} in your backpack");
+                }
+                else
+                {
+                    Console.WriteLine($"You have {Backpack.cans.Count} cans in our backpack. They are:\n");
+                    Console.WriteLine(Backpack.cans[i].Name);
+                        
+                }
+                
             }
+
+
 
 
         }
