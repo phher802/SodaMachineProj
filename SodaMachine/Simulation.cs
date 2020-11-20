@@ -31,7 +31,7 @@ namespace SodaMachine
             }
 
             _customer.WhatIsInMyBackPack();
-            _customer.HowMuchMoneyIsLeftInMyWallet();
+            _customer.HowMuchCoinsLeftInWallet();
 
 
 
