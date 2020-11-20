@@ -51,7 +51,6 @@ namespace SodaMachine
 
             return coinsForPayment;
 
-
         }
         //Returns a coin object from the wallet based on the name passed into it.
         //Returns null if no coin can be found
@@ -97,7 +96,7 @@ namespace SodaMachine
 
         }
 
-        public void CheckContentsOfBackPack()
+        public void CheckContentsOfBackpack()
         {
            
 
@@ -115,8 +114,6 @@ namespace SodaMachine
                 }
                 
             }
-
-
 
 
         }

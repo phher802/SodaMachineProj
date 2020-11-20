@@ -43,7 +43,6 @@ namespace SodaMachine
                 _register.Add(dime);
             }
 
-
             for (int i = 0; i < 50; i++)
             {
                 Coin penny = new Penny();
@@ -51,14 +50,10 @@ namespace SodaMachine
             }
 
 
-
-
-
         }
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
         {
-
             for (int i = 0; i < 5; i++)
             {
                 Can cola = new Cola();
@@ -70,8 +65,6 @@ namespace SodaMachine
                 Can rootBeer = new RootBeer();
                 _inventory.Add(rootBeer);
             }
-
-
 
         }
         //Method to be called to start a transaction.
@@ -96,19 +89,19 @@ namespace SodaMachine
             // 3. get money from wallet
             // 4. put money in sodamachine
             // 4. soda machine calculate transaction
-            // 5. soda is removed from inventory
+            // 5. soda is removed from inventory, if any
             // 6. get change if any
             // 7. put change into wallet
             // 8. put soda into backpack
+
             string sodaChoice = UserInterface.SodaSelection(_inventory);
+
             Can sodaCan = GetSodaFromInventory(sodaChoice);
+
             List<Coin> custPayment = customer.GatherCoinsFromWallet(sodaCan);
-            //DepositCoinsIntoRegister(customer.GatherCoinsFromWallet(sodaCan));
 
             CalculateTransaction(custPayment, sodaCan, customer);
 
-
-            //Call the GetSodaFromInventory method.  When you do that, what value is passed with it?
 
             //other methods to call to make a transaction
             //what are the different types of transactions?
@@ -134,11 +127,9 @@ namespace SodaMachine
                     break;
                 }
 
-
             }
 
             return getSoda;
-
         }
 
         //This is the main method for calculating the result of the transaction.
@@ -159,16 +150,13 @@ namespace SodaMachine
             {
                 if (_register.Count > 0)
                 {
-
                     _inventory.Remove(chosenSoda);
                     customer.AddCanToBackpack(chosenSoda);
                     UserInterface.EndMessage(chosenSoda.Name, changeAmnt);
                     customer.AddCoinsIntoWallet(changeList);
-
                 }
                 else if (_register.Count <= 0)
                 {
-
                     customer.AddCoinsIntoWallet(changeList);
                 }
             }
@@ -198,9 +186,6 @@ namespace SodaMachine
             Coin dime = new Dime();
             Coin penny = new Penny();
 
-
-            //for (int i = 0; i < changeValue; i++) //loop through changevalue amount
-            //{
             if (changeValue <= _register.Count) //if register is greater than changevalue then get coin from register
             {
                 while (changeValue >= 0)
@@ -225,24 +210,16 @@ namespace SodaMachine
                     {
                         changeToDispense.Add(penny);
                         changeValue = -penny.Value;
-
                     }
                 }
 
-
-
             }
-
-
-            //}
 
             return changeToDispense;
 
             //what is the change value passed in?  if $1.10
             //what coins are needed to return change value?
             // where are the values of coins stores? in the register list
-
-
 
         }
         //Reusable method to check if the register has a coin of that name.
@@ -301,14 +278,12 @@ namespace SodaMachine
 
             return changeToReturn;
 
-
         }
         //Takes in a list of coins to return the total value of the coins as a double.
         private double TotalCoinValue(List<Coin> payment)
         {
             //what is the value of the coins?
             double valueOfCoinList = 0;
-
 
             foreach (Coin coin in payment)
             {
@@ -324,8 +299,6 @@ namespace SodaMachine
             }
             return valueOfCoinList;
 
-       
-
         }
         //Puts a list of coins into the soda machines register from the customer
         private void DepositCoinsIntoRegister(List<Coin> coins)
@@ -337,12 +310,6 @@ namespace SodaMachine
             {
                 _register.Add(coins[i]);
             }
-
-
-
-
-
-
 
         }
     }
