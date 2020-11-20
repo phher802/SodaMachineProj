@@ -28,14 +28,13 @@ namespace SodaMachine
                 _sodaMachine.BeginTransaction(_customer);
                 _customer.CheckContentsOfBackpack();
                 _customer.HowMuchCoinsLeftInWallet();
+
+                _sodaMachine.RegisterBalance();
                 willProceed = UserInterface.ContinuePrompt("Continue to next transaction?");
                 Console.Clear();
             }
 
-            
-
-
-
+           
         }
     }
 }

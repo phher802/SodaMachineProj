@@ -146,6 +146,7 @@ namespace SodaMachine
             double changeAmnt = DetermineChange(valueOfCoinList, chosenSoda.Price);
             List<Coin> changeList = GatherChange(changeAmnt);
 
+
             if (valueOfCoinList > chosenSoda.Price)
             {
                 if (_register.Count > 0)
@@ -192,22 +193,26 @@ namespace SodaMachine
                 {
                     if (changeValue - quarter.Value >= 0)
                     {
+                        GetCoinFromRegister(quarter.Name);
                         changeToDispense.Add(quarter);
                         changeValue -= quarter.Value;
                     }
                     else if (changeValue - dime.Value >= 0)
                     {
+                        GetCoinFromRegister(dime.Name);
                         changeToDispense.Add(dime);
                         changeValue -= dime.Value;
 
                     }
                     else if (changeValue - nickel.Value >= 0)
                     {
+                        GetCoinFromRegister(nickel.Name);
                         changeToDispense.Add(nickel);
                         changeValue -= nickel.Value;
                     }
                     else
                     {
+                        GetCoinFromRegister(penny.Name);
                         changeToDispense.Add(penny);
                         changeValue = -penny.Value;
                     }
@@ -251,18 +256,22 @@ namespace SodaMachine
         {
             Coin coinToRemove = null;
 
+
             for (int i = 0; i < _register.Count; i++)
             {
-
-                //if (name == _register[i].Name)
+           
                 if (RegisterHasCoin(name))
                 {
-                    coinToRemove = _register[i];
-                    _register.Remove(coinToRemove);
-                    //once its found, dont loop anymore
-                    break;
-                }
+                    if (name == _register[i].Name)
+                    {
+                                         
+                       _register.Remove(_register[i]);
+                                            
+                    }
 
+                }
+                //once its found, dont loop anymore
+                break;
             }
 
             return coinToRemove;
@@ -312,5 +321,12 @@ namespace SodaMachine
             }
 
         }
+
+        public void RegisterBalance()
+        {
+            double currentRegisterBalance = TotalCoinValue(_register);
+            Console.WriteLine(currentRegisterBalance);
+        }
+
     }
 }

@@ -20,7 +20,6 @@ namespace SodaMachine
             Backpack = new Backpack();
             coinsForPayment = new List<Coin>();
 
-
         }
         //Member Methods (Can Do)
 
